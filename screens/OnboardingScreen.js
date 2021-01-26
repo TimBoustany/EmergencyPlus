@@ -3,7 +3,7 @@ import { View, Text, Button, Image, TouchableOpacity, StyleSheet } from 'react-n
 
 import Onboarding from 'react-native-onboarding-swiper';
 
-
+// {{navigation}}: we are obliged to put this if we want to nvaigate to another screen.
 const OnboardingScreen = ({ navigation }) => {
     return (
         <Onboarding

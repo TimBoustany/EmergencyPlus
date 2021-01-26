@@ -3,7 +3,7 @@ import { View, TextInput, StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { windowHeight, windowWidth } from '../utils/Dimentions';
 
-const FormInput = ({ labelValue, placeholderText, iconType, ...rest }) => {
+const FormInput = ({ labelValue, placeholderText, iconType, iconType2, ...rest }) => {
   return (
     <View style={styles.inputContainer}>
       <View style={styles.iconStyle}>
@@ -17,6 +17,9 @@ const FormInput = ({ labelValue, placeholderText, iconType, ...rest }) => {
         placeholderTextColor="#666"
         {...rest}
       />
+      <View style={styles.iconStyle}>
+        <AntDesign name={iconType2} size={25} color="#666" />
+      </View>
     </View>
   );
 };

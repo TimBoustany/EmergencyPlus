@@ -4,6 +4,7 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import { AuthContext } from '../navigation/AuthProvider';
+import { checkForUpdateAsync } from 'expo-updates';
 
 
 const SignupScreen = ({ navigation }) => {
@@ -11,7 +12,8 @@ const SignupScreen = ({ navigation }) => {
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
-  const { register } = useContext(AuthContext);
+  const { check } = useContext(AuthContext);
+
 
   return (
     <View style={styles.container}>
@@ -37,7 +39,7 @@ const SignupScreen = ({ navigation }) => {
 
       <FormInput
         labelValue={confirmPassword}
-        onChangeText={(userPassword) => setPassword(userPassword)}
+        onChangeText={(userPassword) => setConfirmPassword(userPassword)}
         placeholderText="Confirm Password"
         iconType="lock"
         secureTextEntry={true}
@@ -45,7 +47,7 @@ const SignupScreen = ({ navigation }) => {
 
       <FormButton
         buttonTitle="Sign Up"
-        onPress={() => register(email, password)}
+        onPress={() => { check(email, password, confirmPassword) }}
       />
 
       <View style={styles.textPrivate}>
@@ -65,7 +67,7 @@ const SignupScreen = ({ navigation }) => {
 
       <SocialButton
         buttonTitle="Sign Up with Google"
-        btnType="facebook"
+        btnType="google"
         color="#4867aa"
         backgroundColor="#f5e7ea"
         onPress={() => { }}

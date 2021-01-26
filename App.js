@@ -4,7 +4,6 @@ import Providers from './navigation';
 
 const App = () => {
   return <Providers />;
-
 }
 
 

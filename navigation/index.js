@@ -4,6 +4,7 @@ import Routes from './Routes';
 
 const Providers = () => {
     return (
+        // We wrap everything with <AuthProvider> (that contains all functions we will use)
         <AuthProvider>
             <Routes />
         </AuthProvider>
@@ -13,17 +14,3 @@ const Providers = () => {
 export default Providers;
 
 
-/*
-
-import React from 'react';
-import Routes from './Routes';
-
-const Providers = () => {
-    return (
-        <Routes />
-    );
-};
-
-export default Providers;
-
-*/

@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import * as firebase from "firebase";
-//import auth from '@react-native-firebase/auth';
 import { AuthContext } from './AuthProvider';
 import AppStack from './AppStack';
 import AuthStack from './AuthStack';
 
+// Here, we put our API key for firebase:
 var firebaseConfig = {
     apiKey: "AIzaSyBsJmCF-m1yRmfAOyyMiO1TinKhR9lF8Xk",
     authDomain: "emergencyplus-87fb1.firebaseapp.com",
@@ -17,49 +17,39 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const Routes = () => {
+const Routes = ({ navigation }) => {
 
-    const { user, setUser } = useContext(AuthContext);
-    const [initializing, setInitializing] = useState(true);
+
+
+    const { user, setUser } = useContext(AuthContext); // we are importing user and setUser from AuthProvider
+    const [initializing, setInitializing] = useState(true); // we are creating "initializing"
 
     const onAuthStateChanged = (user) => {
         setUser(user);
         if (initializing) setInitializing(false);
     }
 
+    //This is a listener: we are subscribing to our firebase user and listening to it.
     useEffect(() => {
         const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
         return subscriber;
     }, []);
 
-    if (initializing) return null;
+    if (initializing) return null; //Here is to display a loading panel (instead of "null", navigate to loading)
 
+    // Here: if user is not null, <AppStack> will display. Else, <AuthStack> will display.
+    // When we are loged in (after loggin in OR creating new acc), without re calling the listner, it will know that user is not null and will display <AppStack> automatically.
+    // But once we logout, it will also automatically know that it should display <AuthStack>
     return (
+
         <NavigationContainer>
             {user ? <AppStack /> : <AuthStack />}
         </NavigationContainer>
+
     );
+
+
 };
 
 export default Routes;
 
-
-/*
-
-import React, { useContext, useState, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-
-import AuthStack from './AuthStack';
-
-
-const Routes = () => {
-
-    return (
-        <NavigationContainer>
-            <AuthStack />
-        </NavigationContainer>
-    );
-};
-
-export default Routes;
-*/

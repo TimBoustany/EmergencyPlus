@@ -6,14 +6,16 @@ import SocialButton from '../components/SocialButton';
 import { AuthContext } from '../navigation/AuthProvider';
 
 const LoginScreen = ({ navigation }) => {
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const { login } = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/rn-social-logo.png')}
+        source={require('../assets/Logo.png')}
         style={styles.logo}
       />
       <Text style={styles.text}>Emergency+</Text>
@@ -43,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
         onPress={() => login(email, password)}
       />
 
-      <TouchableOpacity style={styles.forgotButton} onPress={() => { }}>
+      <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.navigate("Forgot")}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>
       </TouchableOpacity>
 
