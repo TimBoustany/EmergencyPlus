@@ -11,7 +11,7 @@ import { AuthContext } from '../navigation/AuthProvider';
 
 
 
-const UserInfoScreen = ({ navigation }) => {
+const UserInfoScreen2 = ({ navigation }) => {
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [dateOfBirth, setDateOfBirth] = useState();
@@ -21,6 +21,12 @@ const UserInfoScreen = ({ navigation }) => {
 
     const { user } = useContext(AuthContext);
     const { userInfoUpdate } = useContext(AuthContext);
+
+    function confirmButton() {
+        userInfoUpdate(user.email, firstName, lastName, dateOfBirth, phoneNumber, gender, bloodType);
+        navigation.navigate("Home");
+
+    }
 
 
     return (
@@ -91,7 +97,7 @@ const UserInfoScreen = ({ navigation }) => {
 
                 <FormButton
                     buttonTitle="Confirm"
-                    onPress={() => userInfoUpdate(user.email, firstName, lastName, dateOfBirth, phoneNumber, gender, bloodType)}
+                    onPress={() => confirmButton()}
                 />
             </View >
         </ScrollView>
@@ -104,7 +110,7 @@ const UserInfoScreen = ({ navigation }) => {
     );
 }
 
-export default UserInfoScreen;
+export default UserInfoScreen2;
 
 const styles = StyleSheet.create({
     container: {

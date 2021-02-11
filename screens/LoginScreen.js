@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, Button, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, Button, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
@@ -13,62 +13,65 @@ const LoginScreen = ({ navigation }) => {
   const { login } = useContext(AuthContext);
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../assets/Logo.png')}
-        style={styles.logo}
-      />
-      <Text style={styles.text}>Emergency+</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <Image
+          source={require('../assets/Logo.png')}
+          style={styles.logo}
+        />
+        <Text style={styles.text}>Emergency+</Text>
 
-      <FormInput
-        labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
-        placeholderText="Email"
-        iconType="user"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
+        <FormInput
+          labelValue={email}
+          onChangeText={(userEmail) => setEmail(userEmail)}
+          placeholderText="Email"
+          iconType="user"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
 
-      <FormInput
-        labelValue={password}
-        onChangeText={(userPassword) => setPassword(userPassword)}
-        placeholderText="Password"
-        iconType="lock"
-        autoCapitalize="none"
-        autoCorrect={false}
-        secureTextEntry={true}
-      />
+        <FormInput
+          labelValue={password}
+          onChangeText={(userPassword) => setPassword(userPassword)}
+          placeholderText="Password"
+          iconType="lock"
+          autoCapitalize="none"
+          autoCorrect={false}
+          secureTextEntry={true}
+        />
 
-      <FormButton
-        buttonTitle="Sign In"
-        onPress={() => login(email, password)}
-      />
+        <FormButton
+          buttonTitle="Sign In"
+          onPress={() => login(email, password)}
+        />
 
-      <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.navigate("Forgot")}>
-        <Text style={styles.navButtonText}>Forgot Password?</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.navigate("Forgot")}>
+          <Text style={styles.navButtonText}>Forgot Password?</Text>
+        </TouchableOpacity>
 
-      <SocialButton
-        buttonTitle="Sign In with Facebook"
-        btnType="facebook"
-        color="#4867aa"
-        backgroundColor="#e6eaf4"
-        onPress={() => { }}
-      />
+        <SocialButton
+          buttonTitle="Sign In with Facebook"
+          btnType="facebook"
+          color="#4867aa"
+          backgroundColor="#e6eaf4"
+          onPress={() => { }}
+        />
 
-      <SocialButton
-        buttonTitle="Sign In with Google"
-        btnType="google"
-        color="#4867aa"
-        backgroundColor="#f5e7ea"
-        onPress={() => { }}
-      />
+        <SocialButton
+          buttonTitle="Sign In with Google"
+          btnType="google"
+          color="#4867aa"
+          backgroundColor="#f5e7ea"
+          onPress={() => { }}
+        />
 
-      <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.navigate("Signup")}>
-        <Text style={styles.navButtonText}>Don't have an account? Create Here</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.forgotButton} onPress={() => navigation.navigate("Signup")}>
+          <Text style={styles.navButtonText}>Don't have an account? Create Here</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+
 
   );
 };

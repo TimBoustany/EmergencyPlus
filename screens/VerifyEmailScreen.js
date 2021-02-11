@@ -7,7 +7,7 @@ const VerifyEmailScreen = () => {
 
     const { logout } = useContext(AuthContext); // we take the function logout from AuthContext in <AuthProvider>
     const { sendVerificationEmail } = useContext(AuthContext);
-
+    const { user } = useContext(AuthContext);
 
     return (
         <View style={styles.container}>

@@ -29,7 +29,8 @@ const Routes = ({ navigation }) => {
         if (initializing) setInitializing(false);
     }
 
-    //This is a listener: we are subscribing to our firebase user and listening to it.
+    // This is a listener: we are subscribing to our firebase user and listening to it.
+    // UseEffect() is a function  that executes only once when we open the screen and everything loads (its like a constructor but runs only one time).
     useEffect(() => {
         const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
         return subscriber;

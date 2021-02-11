@@ -1860,6 +1860,11 @@
   resolved "https://registry.npmjs.org/@react-native-firebase/auth/-/auth-10.4.1.tgz"
   integrity sha512-Zle6xJin3u0a0oTrPqmumc7HgANXxJLhKxeJO+KQYp/AdCWU5/JYcxjVuOZjBhr8Vuvs/oVRC/7vt9p+CUasqQ==
 
+"@react-native-firebase/firestore@^10.5.1":
+  version "10.5.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-10.5.1.tgz#ecf047a38e20838297e2ab307b0769f1ca114c33"
+  integrity sha512-c51AynnkAm1ErnKKY5nIBFHUERkxD7nQE5G7zBo8t7T0P8YBofErxCjT7QTttILiyE/gFpAHsIsaX5a+CHCYDA==
+
 "@react-native-picker/picker@^1.9.7":
   version "1.9.10"
   resolved "https://registry.npmjs.org/@react-native-picker/picker/-/picker-1.9.10.tgz"

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
@@ -10,22 +10,24 @@ const ForgotPasswordScreen = () => {
     const { sendPassReset } = useContext(AuthContext);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Enter your e-mail:</Text>
-            <FormInput
-                labelValue={email}
-                onChangeText={(userEmail) => setEmail(userEmail)}
-                placeholderText="Email"
-                iconType="user"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-            />
-            <FormButton
-                buttonTitle="Send reset link"
-                onPress={() => sendPassReset(email)}
-            />
-        </View>
+        <ScrollView>
+            <View style={styles.container}>
+                <Text style={styles.text}>Enter your e-mail:</Text>
+                <FormInput
+                    labelValue={email}
+                    onChangeText={(userEmail) => setEmail(userEmail)}
+                    placeholderText="Email"
+                    iconType="user"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                />
+                <FormButton
+                    buttonTitle="Send reset link"
+                    onPress={() => sendPassReset(email)}
+                />
+            </View>
+        </ScrollView>
     );
 }
 
