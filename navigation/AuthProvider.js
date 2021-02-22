@@ -1,10 +1,12 @@
 import React, { createContext, useState } from 'react';
 import * as firebase from 'firebase/app';
-import '@firebase/firestore'
+import '@firebase/firestore';
 
 // Here we have all the functions we will use (login, logout, ...)
 
 export const AuthContext = createContext();
+
+
 
 
 export const AuthProvider = ({ children }) => {
@@ -102,13 +104,16 @@ export const AuthProvider = ({ children }) => {
                         await firebase.firestore()
                             .collection('requests')
                             .doc(Email)
-                            .set({ name: Name, location: Location, bloodType: BloodType })
+                            .set({ name: Name, location: Location, bloodType: BloodType, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
                     } catch (e) {
                         console.log(e);
                         var fgfr = e;
                         alert(fgfr);
                     }
-                }
+                },
+
+
+
 
             }}>
             {children}

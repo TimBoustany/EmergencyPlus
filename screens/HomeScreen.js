@@ -1,5 +1,5 @@
 import React, { Component, useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import FormButton from '../components/FormButton';
 import { AuthContext } from '../navigation/AuthProvider';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,7 +14,8 @@ import UserInfoScreen2 from '../screens/UserInfoScreen2';
 class HomeScreen extends Component {
 
     state = {
-        user: {}
+        user: {},
+        loading: true,
     }
 
     unsubscribe = null;
@@ -24,7 +25,7 @@ class HomeScreen extends Component {
 
         // Here we are subscribing to the database's file of user, in order to update in real time the screen
         this.unsubscribe = firebase.firestore().collection("users").doc("tim-boustany@hotmail.com").onSnapshot(doc => {
-            this.setState({ user: doc.data() });
+            this.setState({ user: doc.data(), loading: false });
             this.set(this.state.user.profileSet);
 
         })
@@ -43,6 +44,13 @@ class HomeScreen extends Component {
 
 
     render() {
+        if (this.state.loading) {
+            return (
+                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+                    <ActivityIndicator size="large" color="red" />
+                </View>
+            )
+        }
 
         return (
 

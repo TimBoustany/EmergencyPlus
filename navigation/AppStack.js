@@ -16,12 +16,13 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import BloodRequestsScreen from '../screens/BloodRequestsScreen';
 import RequestInfoScreen from '../screens/RequestInfoScreen';
-
+import RegisterDonorScreen from '../screens/RegisterDonorScreen';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 const Stack2 = createStackNavigator();
 const Stack3 = createStackNavigator();
+const Stack4 = createStackNavigator();
 
 const VerifyAcc = () => {
     return (
@@ -76,6 +77,29 @@ const BloodRequestS = () => {
     );
 }
 
+const DonorS = () => {
+    return (
+        <Stack4.Navigator>
+            <Stack4.Screen name="RegisterDonor" component={RegisterDonorScreen} options={({ navigation }) => ({
+                title: '',
+                headerStyle: {
+                    backgroundColor: '#f9fafd',
+                    shadowColor: '#f9fafd',
+                    elevation: 0,
+                },
+                headerLeft: () => (
+                    <TouchableOpacity style={{ alignItems: 'flex-end', margin: 6 }}
+                        onPress={() => navigation.openDrawer()}>
+                        <FontAwesome name='bars' size={30} color='red' />
+
+                    </TouchableOpacity>
+                ),
+            })} />
+            <Stack4.Screen name="RequestInfo" component={RequestInfoScreen} />
+        </Stack4.Navigator>
+    );
+}
+
 // Once logged in, automatically it will display <AppStack> (because of our listener).
 const AppStack = () => {
 
@@ -108,6 +132,7 @@ const AppStack = () => {
                     gestureEnabled: false,
                 })} />
                 <Drawer.Screen name="BloodRequests" component={BloodRequestS} />
+                <Drawer.Screen name="RegisterDonor" component={DonorS} />
 
             </Drawer.Navigator>
 

@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as firebase from "firebase";
 import { AuthContext } from './AuthProvider';
@@ -36,8 +37,10 @@ const Routes = ({ navigation }) => {
         return subscriber;
     }, []);
 
-    if (initializing) return null; //Here is to display a loading panel (instead of "null", navigate to loading)
-
+    if (initializing)  //Here is to display a loading panel (instead of "null", navigate to loading)
+    {
+        return null;
+    }
     // Here: if user is not null, <AppStack> will display. Else, <AuthStack> will display.
     // When we are loged in (after loggin in OR creating new acc), without re calling the listner, it will know that user is not null and will display <AppStack> automatically.
     // But once we logout, it will also automatically know that it should display <AuthStack>

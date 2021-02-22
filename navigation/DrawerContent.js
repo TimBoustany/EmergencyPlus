@@ -52,6 +52,18 @@ export function DrawerContent(props) {
                     label="Blood requests"
                     onPress={() => { props.navigation.navigate("BloodRequests") }}
                 />
+                <DrawerItem
+                    activeTintColor='red'
+                    style={styles.bottomDrawerSection2}
+                    icon={() => (
+                        <AntDesign
+                            name="table"
+                            size='20'
+                        />
+                    )}
+                    label="Register as Donor"
+                    onPress={() => { props.navigation.navigate("RegisterDonor") }}
+                />
             </DrawerContentScrollView>
             <DrawerItem
                 style={styles.bottomDrawerSection}
