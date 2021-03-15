@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Text, View, ScrollView, StyleSheet, ActivityIndicator, Item } from 'react-native';
+import React, { Component, useEffect } from 'react';
+import { Text, View, ScrollView, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Divider } from 'react-native-paper';
 import FormButton from '../components/FormButton';
@@ -11,6 +11,7 @@ class BloodRequestsScreen extends Component {
     state = {
         requestList: [],
         loading: true,
+        isFetching: false,
     }
 
     unsubscribe = null;
@@ -24,16 +25,25 @@ class BloodRequestsScreen extends Component {
             });
             this.setState({ requestList: reqList, loading: false })
         });
-
-
-
     }
-
 
     componentWillUnmount() {
         this.unsubscribe();
     }
 
+
+    Refresh() {
+        //alert("hhh");
+        this.state.isFetching = true;
+        let reqList = [];
+        this.unsubscribe = firebase.firestore().collection('requests').onSnapshot(querySnapShot => {
+            querySnapShot.forEach(doc => {
+                reqList.push(doc.data());
+            });
+            this.setState({ requestList: reqList, loading: false, isFetching: false })
+        });
+
+    }
 
 
     render() {
@@ -45,20 +55,30 @@ class BloodRequestsScreen extends Component {
             )
         }
         return (
-            <ScrollView>
+            <ScrollView refreshControl={
+                <RefreshControl
+                    refreshing={this.state.isFetching}
+                    onRefresh={() => this.Refresh()}
+                />
+            } >
                 <View>
 
+
+                    <View style={{ flex: 1, marginTop: 40 }}>
+                        <FlatList
+                            data={this.state.requestList}
+                            ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'red' }} />}
+                            renderItem={({ item }) => <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <Text>User Name: {item.name}</Text>
+                            </View>}
+                            keyExtractor={(i, k) => k.toString()}
+                            refreshing={this.state.isLoad}
+                            onRefresh={this.Refresh}
+                        />
+                    </View>
                     <FormButton
                         buttonTitle="Add"
                         onPress={() => { this.props.navigation.navigate("RequestInfo") }}
-                    />
-
-                    <FlatList
-                        data={this.state.requestList}
-                        ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'red' }} />}
-                        renderItem={({ item }) => <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text>User Name: {item.name}</Text>
-                        </View>}
                     />
 
                 </View>

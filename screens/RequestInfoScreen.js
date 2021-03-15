@@ -6,7 +6,7 @@ import FormButton from '../components/FormButton';
 import { Form, Label, Item, Picker } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { AuthContext } from '../navigation/AuthProvider';
-
+import BloodRequestsScreen from '../screens/BloodRequestsScreen';
 
 const RequestInfoScreen = () => {
 
@@ -16,6 +16,12 @@ const RequestInfoScreen = () => {
 
     const { user } = useContext(AuthContext);
     const { requestBlood } = useContext(AuthContext);
+
+
+    function Submit() {
+        requestBlood(user.email, name, location, bloodType);
+        new BloodRequestsScreen().Refresh();
+    }
 
     return (
         <ScrollView>
@@ -61,7 +67,7 @@ const RequestInfoScreen = () => {
 
                 <FormButton
                     buttonTitle="Confirm"
-                    onPress={() => { requestBlood(user.email, name, location, bloodType) }}
+                    onPress={() => { Submit() }}
                 />
             </View>
         </ScrollView>
