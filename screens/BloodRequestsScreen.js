@@ -8,6 +8,11 @@ import '@firebase/firestore'
 
 
 class BloodRequestsScreen extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         requestList: [],
         loading: true,
@@ -33,7 +38,6 @@ class BloodRequestsScreen extends Component {
 
 
     Refresh() {
-        //alert("hhh");
         this.state.isFetching = true;
         let reqList = [];
         this.unsubscribe = firebase.firestore().collection('requests').onSnapshot(querySnapShot => {
@@ -44,7 +48,6 @@ class BloodRequestsScreen extends Component {
         });
 
     }
-
 
     render() {
         if (this.state.loading) {
@@ -67,10 +70,15 @@ class BloodRequestsScreen extends Component {
                     <View style={{ flex: 1, marginTop: 40 }}>
                         <FlatList
                             data={this.state.requestList}
-                            ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'red' }} />}
-                            renderItem={({ item }) => <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <Text>User Name: {item.name}</Text>
+                            ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'white' }} />}
+                            renderItem={({ item }) => <View style={{ height: 100, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <FormButton
+                                    buttonTitle={item.name}
+                                    onPress={() => { this.props.navigation.navigate("Patient", { usrEmail: item.userEmail }) }}
+                                />
+                                <Text>{item.userEmail}</Text>
                             </View>}
+
                             keyExtractor={(i, k) => k.toString()}
                             refreshing={this.state.isLoad}
                             onRefresh={this.Refresh}

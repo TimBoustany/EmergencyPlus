@@ -20,11 +20,13 @@ class HomeScreen extends Component {
 
     unsubscribe = null;
 
+    userEmail = firebase.auth().currentUser.email;
+
+
     // componentDidMount is a fucntion that executes once the class is called.
     componentDidMount() {
-
         // Here we are subscribing to the database's file of user, in order to update in real time the screen
-        this.unsubscribe = firebase.firestore().collection("users").doc("tim-boustany@hotmail.com").onSnapshot(doc => {
+        this.unsubscribe = firebase.firestore().collection("users").doc(this.userEmail).onSnapshot(doc => {
             this.setState({ user: doc.data(), loading: false });
             this.set(this.state.user.profileSet);
 

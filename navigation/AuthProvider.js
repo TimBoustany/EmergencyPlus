@@ -104,7 +104,31 @@ export const AuthProvider = ({ children }) => {
                         await firebase.firestore()
                             .collection('requests')
                             .doc(Email)
-                            .set({ name: Name, location: Location, bloodType: BloodType, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
+                            .set({ name: Name, location: Location, bloodType: BloodType, userEmail: Email, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
+                    } catch (e) {
+                        console.log(e);
+                        var fgfr = e;
+                        alert(fgfr);
+                    }
+                },
+                updateBlood: async (Email, Name, Location, BloodType) => {
+                    try {
+                        await firebase.firestore()
+                            .collection('requests')
+                            .doc(Email)
+                            .set({ name: Name, location: Location, bloodType: BloodType, userEmail: Email, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
+                    } catch (e) {
+                        console.log(e);
+                        var fgfr = e;
+                        alert(fgfr);
+                    }
+                },
+                deleteBlood: async (Email, Name, Location, BloodType) => {
+                    try {
+                        await firebase.firestore()
+                            .collection('requests')
+                            .doc(Email)
+                            .delete();
                     } catch (e) {
                         console.log(e);
                         var fgfr = e;

@@ -17,6 +17,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import BloodRequestsScreen from '../screens/BloodRequestsScreen';
 import RequestInfoScreen from '../screens/RequestInfoScreen';
 import RegisterDonorScreen from '../screens/RegisterDonorScreen';
+import ViewRequestScreen from '../screens/ViewRequestScreen';
+import PatientScreen from '../screens/PatientScreen';
+import EditRequestScreen from '../screens/EditRequestScreen';
+
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -73,6 +77,11 @@ const BloodRequestS = () => {
                 ),
             })} />
             <Stack3.Screen name="RequestInfo" component={RequestInfoScreen} />
+            <Stack3.Screen name="ViewRequest" component={ViewRequestScreen} />
+            <Stack3.Screen name="Patient" component={PatientScreen} />
+            <Stack3.Screen name="Edit" component={EditRequestScreen} />
+
+
         </Stack3.Navigator>
     );
 }
