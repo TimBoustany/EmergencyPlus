@@ -110,6 +110,16 @@ export const AuthProvider = ({ children }) => {
                         var fgfr = e;
                         alert(fgfr);
                     }
+                    try {
+                        await firebase.firestore()
+                            .collection('history')
+                            .add({ name: Name, location: Location, bloodType: BloodType, userEmail: Email, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
+                    } catch (e) {
+                        console.log(e);
+                        var fgfr = e;
+                        alert(fgfr);
+                    }
+
                 },
                 updateBlood: async (Email, Name, Location, BloodType) => {
                     try {

@@ -64,6 +64,18 @@ export function DrawerContent(props) {
                     label="Register as Donor"
                     onPress={() => { props.navigation.navigate("RegisterDonor") }}
                 />
+                <DrawerItem
+                    activeTintColor='red'
+                    style={styles.bottomDrawerSection2}
+                    icon={() => (
+                        <AntDesign
+                            name="inbox"
+                            size='20'
+                        />
+                    )}
+                    label="History"
+                    onPress={() => { props.navigation.navigate("History") }}
+                />
             </DrawerContentScrollView>
             <DrawerItem
                 style={styles.bottomDrawerSection}

@@ -20,6 +20,7 @@ import RegisterDonorScreen from '../screens/RegisterDonorScreen';
 import ViewRequestScreen from '../screens/ViewRequestScreen';
 import PatientScreen from '../screens/PatientScreen';
 import EditRequestScreen from '../screens/EditRequestScreen';
+import HistoryScreen from '../screens/HistoryScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -27,6 +28,7 @@ const Stack = createStackNavigator();
 const Stack2 = createStackNavigator();
 const Stack3 = createStackNavigator();
 const Stack4 = createStackNavigator();
+const Stack5 = createStackNavigator();
 
 const VerifyAcc = () => {
     return (
@@ -109,6 +111,29 @@ const DonorS = () => {
     );
 }
 
+const HistoryS = () => {
+    return (
+        <Stack5.Navigator>
+            <Stack5.Screen name="History" component={HistoryScreen} options={({ navigation }) => ({
+                title: '',
+                headerStyle: {
+                    backgroundColor: '#f9fafd',
+                    shadowColor: '#f9fafd',
+                    elevation: 0,
+                },
+                headerLeft: () => (
+                    <TouchableOpacity style={{ alignItems: 'flex-end', margin: 6 }}
+                        onPress={() => navigation.openDrawer()}>
+                        <FontAwesome name='bars' size={30} color='red' />
+
+                    </TouchableOpacity>
+                ),
+            })} />
+            <Stack5.Screen name="Patient" component={PatientScreen} />
+        </Stack5.Navigator>
+    );
+}
+
 // Once logged in, automatically it will display <AppStack> (because of our listener).
 const AppStack = () => {
 
@@ -142,6 +167,8 @@ const AppStack = () => {
                 })} />
                 <Drawer.Screen name="BloodRequests" component={BloodRequestS} />
                 <Drawer.Screen name="RegisterDonor" component={DonorS} />
+                <Drawer.Screen name="History" component={HistoryS} />
+
 
             </Drawer.Navigator>
 

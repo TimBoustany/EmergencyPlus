@@ -39,7 +39,6 @@ class PatientScreen extends React.Component {
 
 
 
-
     componentWillUnmount() {
         this.unsubscribe();
     }
