@@ -99,12 +99,12 @@ export const AuthProvider = ({ children }) => {
                         alert(fgf);
                     }
                 },
-                requestBlood: async (Email, Name, Location, BloodType) => {
+                requestBlood: async (Email, Name, Location, BloodType, PhoneNumber, Mode) => {
                     try {
                         await firebase.firestore()
                             .collection('requests')
                             .doc(Email)
-                            .set({ name: Name, location: Location, bloodType: BloodType, userEmail: Email, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
+                            .set({ name: Name, location: Location, bloodType: BloodType, userEmail: Email, createdAt: firebase.firestore.FieldValue.serverTimestamp(), filledBy: '-', phoneNumber: PhoneNumber, mode: Mode })
                     } catch (e) {
                         console.log(e);
                         var fgfr = e;
@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
                     try {
                         await firebase.firestore()
                             .collection('history')
-                            .add({ name: Name, location: Location, bloodType: BloodType, userEmail: Email, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
+                            .add({ name: Name, location: Location, bloodType: BloodType, userEmail: Email, createdAt: firebase.firestore.FieldValue.serverTimestamp(), phoneNumber: PhoneNumber, mode: Mode })
                     } catch (e) {
                         console.log(e);
                         var fgfr = e;

@@ -37,6 +37,8 @@ class PatientScreen extends React.Component {
         })
     }
 
+    status = 'Donate';
+
 
 
     componentWillUnmount() {
@@ -73,6 +75,41 @@ class PatientScreen extends React.Component {
 
     }
 
+    fillReq() {
+        if (this.state.userInfo.filledBy == this.userEmail || this.state.userInfo.filledBy == "-") {
+            if (this.status == "Donate") {
+
+
+                try {
+                    firebase.firestore()
+                        .collection('requests')
+                        .doc(this.state.userInfo.userEmail)
+                        .update({ filledBy: this.userEmail })
+                } catch (e) {
+                    console.log(e);
+                    var fgfr = e;
+                    alert(fgfr);
+                }
+
+
+            }
+            if (this.status == "Remove Donation") {
+                try {
+                    firebase.firestore()
+                        .collection('requests')
+                        .doc(this.props.route.params.usrEmail)
+                        .update({ filledBy: "-" })
+                } catch (e) {
+                    console.log(e);
+                    var fgfr = e;
+                    alert(fgfr);
+                }
+            }
+        }
+        else { alert("You don't have permission to remove donation") }
+    }
+
+
 
     render() {
 
@@ -83,6 +120,8 @@ class PatientScreen extends React.Component {
                 </View>
             )
         }
+
+        if (this.state.userInfo.filledBy == "-") { this.status = "Donate" } else { this.status = "Remove Donation" }
 
         return (
 
@@ -95,9 +134,13 @@ class PatientScreen extends React.Component {
                                 <Text style={styles.text}>Name:            {this.state.userInfo.name}</Text>
                                 <Text style={styles.text}>Blood type:   {this.state.userInfo.bloodType}</Text>
                                 <Text style={styles.text}>Location:       {this.state.userInfo.location}</Text>
+                                <Text style={styles.text}>Mode:            {this.state.userInfo.mode}</Text>
+                                <Text style={styles.text}>Phone:           {this.state.userInfo.phoneNumber}</Text>
                             </View>
                         </View>
                     </View>
+                    <Text style={styles.text2}>Filled by:       {this.state.userInfo.filledBy}</Text>
+
                     <FormButton
                         buttonTitle="Edit"
                         onPress={() => this.Edit()}
@@ -107,6 +150,13 @@ class PatientScreen extends React.Component {
                         onPress={() => this.Delete()}
 
                     />
+                    <View>
+                        <FormButton
+                            buttonTitle={this.status}
+                            onPress={() => this.fillReq()}
+
+                        />
+                    </View>
                 </View>
             </ScrollView >
 
@@ -144,7 +194,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginBottom: 10,
         marginLeft: 25,
-        color: 'white',
+        color: 'black',
     },
     text3: {
         //fontFamily: 'Kufam-SemiBoldItalic',

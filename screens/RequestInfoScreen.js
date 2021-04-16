@@ -13,13 +13,15 @@ const RequestInfoScreen = () => {
     const [name, setName] = useState();
     const [location, setLocation] = useState();
     const [bloodType, setBloodType] = useState();
+    const [phone, setPhone] = useState();
+    const [mode, setMode] = useState();
 
     const { user } = useContext(AuthContext);
     const { requestBlood } = useContext(AuthContext);
 
 
     function Submit() {
-        requestBlood(user.email, name, location, bloodType);
+        requestBlood(user.email, name, location, bloodType, phone, mode);
         new BloodRequestsScreen().Refresh();
     }
 
@@ -45,6 +47,14 @@ const RequestInfoScreen = () => {
                     keyboardType="email-address"
                     autoCorrect={false}
                 />
+                <FormInput
+                    labelValue={phone}
+                    onChangeText={(phoneNumber) => setPhone(phoneNumber)}
+                    placeholderText="Phone number"
+                    iconType="phone"
+                    keyboardType="email-address"
+                    autoCorrect={false}
+                />
 
                 <Item>
                     <Label>Blood Type:</Label>
@@ -61,6 +71,17 @@ const RequestInfoScreen = () => {
                             <Picker.Item label="O-" value="O-"></Picker.Item>
 
 
+                        </Picker>
+                    </Form>
+                </Item>
+                <Item>
+                    <Label>Mode:</Label>
+                    <Form>
+                        <Picker mode="dropdown" iosHeader="Mode:" iosIcon={<AntDesign name="down" size={25} color="#666" />} style={{ width: undefined }} selectedValue={mode}
+                            onValueChange={(mode) => { setMode(mode) }}>
+                            <Picker.Item label="Blood" value="Blood"></Picker.Item>
+                            <Picker.Item label="Plasma" value="Plasma"></Picker.Item>
+                            <Picker.Item label="Platelet" value="Platelet"></Picker.Item>
                         </Picker>
                     </Form>
                 </Item>

@@ -81,7 +81,8 @@ class BloodRequestsScreen extends Component {
                             ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'white' }} />}
                             renderItem={({ item }) => <View style={{ height: 100, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                 <FormButton
-                                    buttonTitle={item.name}
+                                    style={styles.button3}
+                                    buttonTitle={'Name:           ' + item.name + '\n' + 'Blood Type: ' + item.bloodType + '\n' + 'Location:      ' + item.location}
                                     onPress={() => { this.props.navigation.navigate("Patient", { usrEmail: item.userEmail }) }}
                                 />
                                 <Text>{item.userEmail}</Text>
@@ -135,5 +136,13 @@ const styles = StyleSheet.create({
     emptySubtitle: {
         fontSize: 18,
         fontStyle: 'italic'
+    },
+    button3: {
+        backgroundColor: 'red',
+        borderRadius: 6,
+        borderColor: 'red',
+        borderWidth: 1,
+        height: 70,
+        width: 400
     }
 });
